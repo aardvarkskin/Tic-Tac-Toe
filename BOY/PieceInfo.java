@@ -55,23 +55,28 @@ JLabel[] labels;
 	}
 	public void setImage(JPanel panel, int n, int k)
 	{	
-		
+
 		panel.add(labels[k]);	
 		if (labels[k].getText().equals(""))
 		{
 		if (n == 0)
 		{
 			labels[k].setText("");
+			labels[k].setFont(new Font("Verdana", Font.PLAIN, 50));
 		}
 		else if (n == 1)
 		{
 			labels[k].setText("X");
+			labels[k].setFont(new Font("Verdana", Font.PLAIN, 50));
+
 		}
 		else if (n == 2)
 		{
 			 labels[k].setText("O");
+				labels[k].setFont(new Font("Verdana", Font.PLAIN, 50));
+
 		}
 		}
 	}
-	
+
 }

@@ -6,31 +6,29 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.*;
 
-public class Game {
-JFrame frame;
-GridLayout layout;
-TwoPlayer player;
-int n;
-int blig;
-JPanel[] panels;
-PieceInfo piece = new PieceInfo();
-TwoPlayer tp = new TwoPlayer(); 
-	public Game()
+public class GameOne {
+
+	JFrame frame;
+	GridLayout layout;
+	oneplayer player;
+	int n;
+	int blig;
+	JPanel[] panels;
+	PieceInfo piece = new PieceInfo();	
+	
+	public GameOne()
 	{
 		frame = new JFrame("Tic-Tac-Toe");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setSize(400,400);
-		player = new TwoPlayer();
+		player = new oneplayer();
 		panels = new JPanel[9];
-		
-	}
-	public static void main(String [] args)
-	{
-		Game g = new Game();
-		g.playGame();
-	}
+		playGame();
 
+	}
+	
+	
 	public void setUp()
 	{
 		for (int i =0; i < 9; i++)
@@ -41,28 +39,19 @@ TwoPlayer tp = new TwoPlayer();
 		frame.setLayout(layout);
 		for (int i = 0; i < 9; i++)
 		{
+			//System.out.println("so the code works");
 			piece.setBorder(panels[i], i);
 			frame.add(panels[i]);
 		}
 	}
+	
 	public void playGame()
 	{
-		
 		setUp();
-		
-		//while(tp.getWinState()==-1)
-		{
 		userInput();
-		//System.out.println(tp.getWinState());
-		
-		//redraw();
-		//
-		}
-		
 	}
 	public void userInput()
 	{
-		System.out.println("shit works");
 		for (int i = 0; i < 9; i++)
 		{
 			panels[i].addMouseListener(new MouseListener(){
@@ -74,7 +63,7 @@ TwoPlayer tp = new TwoPlayer();
 						 if(((JPanel)source).equals(panels[i]))
 						 {
 							 player.userPlay(i);
-							 System.out.println("n is" + i);
+							 player.compMove(); 
 							 redraw();
 						 }
 					 } 
@@ -98,46 +87,46 @@ TwoPlayer tp = new TwoPlayer();
 			});
 		}
 	}
+	
+	public void setUpGridLayout()
+	{
+		layout = new GridLayout(3,3);
+	}
+
 	public void redraw()
 	{
-		System.out.println("redraw");
 		for (int i = 0; i < 9; i++)
 		{
 			piece.setBorder(panels[i], i);
 			if (player.returnArray()[i] == 0)
 			{
-				//System.out.println("nig");
 				piece.setImage(panels[i], 0, i);
 			}
 			else if (player.returnArray()[i] == 1)
 			{
-				//System.out.println("nig1");
 				piece.setImage(panels[i], 1, i);
 			}
 			else if (player.returnArray()[i] == 2)
 			{
-				//System.out.println("nig2");
 				piece.setImage(panels[i], 2, i);
 			}
-			
-			if(tp.getWinState()!=-1)
-			{
-				System.out.println(tp.getWinState() + "wins");
-			}
-			
-			//frame.add(panels[i]); //dont need to put in pane again...
 		}
-		tp.printArray();
-	}
-	public void setUpGridLayout()
-	{
-		layout = new GridLayout(3,3);
-	}
-	
-	public int returnN()
-	{
-		return n;
-	}
-	
-}
 
+		if(player.getWinState()!=-1)
+		{
+			if (player.getWinState()==1)
+			{
+				JOptionPane.showMessageDialog(null,"You win!");
+
+			}
+			else if (player.getWinState()==2)
+			{
+				JOptionPane.showMessageDialog(null, "You lose!");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Its a draw!");
+			}
+		}
+	}
+}
