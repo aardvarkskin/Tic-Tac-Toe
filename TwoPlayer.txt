@@ -5,6 +5,7 @@ public class TwoPlayer {
 	private int stopper = 0;
 	private int winState = -1;
 	public int winner = -1;
+	public int n;
 	
 	public TwoPlayer()
 	{
@@ -13,56 +14,82 @@ public class TwoPlayer {
 			arr[i] = 0;
 		}
 	}
+	 public void printArray()
+	 {
+		 int counter = 0; 
+		 
+		 for(int i =0; i <9; i++)
+		 {
+			 if(counter == 3)
+			 {
+				 System.out.println(); 
+				 counter = 0; 
+			 }
+			 System.out.print(arr[i] + "\t");
+			 counter++; 
+		 }
+	 }
 	
-	public void userPlay()
+	public void  userPlay(int n)
 	{
-		while(stopper==0)
 		{
 			placePiece(n);
 			if(arr[0]!=0 && arr[0]==arr[1] && arr[1]==arr[2] || 
-					arr[0]!=0 && arr[0]==arr[4] && arr[4]==arr[7] || 
-					arr[0]!=0 && arr[0]==arr[5] && arr[5]==arr[9] || 
-					arr[5]!=0 && arr[5]==arr[2] && arr[2]==arr[8] || 
-					arr[5]!=0 && arr[5]==arr[4] && arr[4]==arr[6] || 
-					arr[5]!=0 && arr[5]==arr[3] && arr[3]==arr[7] || 
-					arr[9]!=0 && arr[9]==arr[6] && arr[6]==arr[3] || 
-					arr[9]!=0 && arr[9]==arr[8] && arr[8]==arr[7])
+					arr[0]!=0 && arr[0]==arr[3] && arr[3]==arr[6] || 
+					arr[0]!=0 && arr[0]==arr[4] && arr[4]==arr[8] || 
+					arr[4]!=0 && arr[4]==arr[1] && arr[1]==arr[7] || 
+					arr[4]!=0 && arr[4]==arr[3] && arr[3]==arr[5] || 
+					arr[4]!=0 && arr[4]==arr[2] && arr[2]==arr[6] || 
+					arr[8]!=0 && arr[8]==arr[5] && arr[5]==arr[2] || 
+					arr[8]!=0 && arr[8]==arr[7] && arr[7]==arr[6])
 			{
 				winState = counter;
-				stopper = 1;
-			}
-			if(winState%2==0 && winState > 0)
-			{
-				System.out.println("O Wins!");
-				winner = 2;
-			}
-			else if(winState%2==1 && winState > 0)
-			{
-				System.out.println("X Wins!");
-				winner = 1;
-			}
-			else
-			{
-				System.out.println("It's a Draw.");
-				winner = 0;
+				//stopper = 1;
 			}
 		}
+		if(winState%2==0 && winState > 0)
+		{
+			//System.out.println("O Wins!");
+			winner = 2;
+			
+		}
+		else if(winState%2==1 && winState > 0)
+		{
+			//System.out.println("X Wins!");
+			winner = 1;
+			//System.out.println("gotem");
+		}
+		else if(counter == 9)
+		{
+			//System.out.println("It's a Draw.");
+			winner = 0;
+		}
+		//return winner; 
+		//return winner; 
 	}
-	
+	public int getWinState()
+	{
+		return winner; 
+	}
 	public void placePiece(int i)
 	{
+		
 		if(arr[i]==0)
 		{
+			System.out.println("sldkfjsldkfj");
 			if(counter%2==1)
 			{
 				arr[i] = 1;
+				System.out.println("gotcha");
 			}
 			else
 			{
 				arr[i] = 2;
+				System.out.println("gotcha");
 			}
 			counter++;
 		}
+		System.out.println("piece placed!");
 	}
 	
 	public int[] returnArray()

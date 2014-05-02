@@ -14,6 +14,7 @@ int n;
 int blig;
 JPanel[] panels;
 PieceInfo piece = new PieceInfo();
+TwoPlayer tp = new TwoPlayer(); 
 	public Game()
 	{
 		frame = new JFrame("Tic-Tac-Toe");
@@ -48,12 +49,16 @@ PieceInfo piece = new PieceInfo();
 	{
 		
 		setUp();
-		TwoPlayer tp = new TwoPlayer(); 
+		
 		//while(tp.getWinState()==-1)
 		{
 		userInput();
-		redraw();
+		//System.out.println(tp.getWinState());
+		
+		//redraw();
+		//
 		}
+		
 	}
 	public void userInput()
 	{
@@ -70,6 +75,7 @@ PieceInfo piece = new PieceInfo();
 						 {
 							 player.userPlay(i);
 							 System.out.println("n is" + i);
+							 redraw();
 						 }
 					 } 
 				}
@@ -90,29 +96,38 @@ PieceInfo piece = new PieceInfo();
 					// TODO Auto-generated method stub	
 					}
 			});
-
 		}
 	}
 	public void redraw()
 	{
+		System.out.println("redraw");
 		for (int i = 0; i < 9; i++)
 		{
 			piece.setBorder(panels[i], i);
 			if (player.returnArray()[i] == 0)
 			{
-				piece.setImage(panels[i], 0);
+				//System.out.println("nig");
+				piece.setImage(panels[i], 0, i);
 			}
 			else if (player.returnArray()[i] == 1)
 			{
-				piece.setImage(panels[i], 1);
+				//System.out.println("nig1");
+				piece.setImage(panels[i], 1, i);
 			}
 			else if (player.returnArray()[i] == 2)
 			{
-				piece.setImage(panels[i], 2);
+				//System.out.println("nig2");
+				piece.setImage(panels[i], 2, i);
 			}
-		
+			
+			if(tp.getWinState()!=-1)
+			{
+				System.out.println(tp.getWinState() + "wins");
+			}
+			
 			//frame.add(panels[i]); //dont need to put in pane again...
 		}
+		tp.printArray();
 	}
 	public void setUpGridLayout()
 	{
