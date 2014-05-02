@@ -1,0 +1,87 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class Console extends JFrame implements MouseListener{
+
+	JPanel panel = new JPanel();
+	JButton button1 = new JButton("One Player Mode");
+	JButton button2 = new JButton("Two Player Mode");
+	
+	public Console()
+	{
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		setSize(600,600);	
+		setLayout(new FlowLayout());
+		setResizable(false);
+		int buttonWidth = 250;
+		int buttonHeight = 100;
+		button1.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		button2.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+		setUp();
+		panel.setPreferredSize(new Dimension(400, 400));
+		add(panel);
+		add(button1);
+		add(button2);
+	}
+	
+	public void setUp()
+	{
+		Game g = new Game();
+		g.frame.setVisible(false);
+		panel = new JPanel();
+		//panel.setVisible(true);
+		panel.setSize(400,400);
+		for (int i = 0; i < 9; i++)
+		{
+			g.panels[i]= new JPanel();
+		}
+		g.setUpGridLayout();
+		panel.setLayout(g.layout);
+		for (int i = 0; i < 9; i++)
+		{
+			g.piece.setBorder(g.panels[i], i);
+			panel.add(g.panels[i]);
+		}
+	}
+	
+	public void mouseClicked(MouseEvent e)
+	{
+		Object test = ((JButton)e.getSource());
+		String[] args = {};
+		if(((JButton)test).equals(button1))
+		{
+			GameOne g1 = new GameOne();
+			g1.main(args);
+		}
+		else if(((JButton)test).equals(button2))
+		{
+			Game g2 = new Game();
+			g2.main(args);
+		}
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub	
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub	
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub	
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub	
+		}
+	
+	public static void main(String[] args)
+	{
+		new Console();
+	}
+}
